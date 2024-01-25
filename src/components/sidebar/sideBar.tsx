@@ -1,6 +1,7 @@
 import { FC, ReactElement } from 'react'; 
 import { Grid } from '@mui/material';
 import Profile from '../profile/profile';
+import JobEntryForm from '../jobEntryForm/jobEntryForm';
 
 const SideBar:FC = ():ReactElement => {
   return (
@@ -16,7 +17,8 @@ const SideBar:FC = ():ReactElement => {
         flexDirection: "column", 
         alignItems:"center"
     }}>
-      <Profile name={ "Ibukun" } />
+      <Profile name={"Ibukun"} />
+      <JobEntryForm/>
     </Grid>
   )
 }
