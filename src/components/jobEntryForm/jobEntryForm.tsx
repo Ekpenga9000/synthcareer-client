@@ -1,38 +1,143 @@
-import { ReactElement, FC } from 'react';
-import { Box, Typography, Stack, Button } from '@mui/material';
-import JobTitleField from './_jobTitleField';
-import JobDescriptionField from './_jobDescriptionField';
-import CompanyNameField from './_companyNameField';
-import ApplicationDate from './_applicationDate';
-
+import { ReactElement, FC, FormEvent } from 'react';
+import { FaPlus } from 'react-icons/fa6';
 
 const JobEntryForm: FC = (): ReactElement => {
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+  };
+
   return (
-    <Box
-      display={'flex'}
-      flexDirection={'column'}
-      alignItems={'flex-start'}
-      width={'100%'}
-      px={4}
-      my={6}
+    <form
+      onSubmit={handleSubmit}
+      className="border border-gray-900/10 flex flex-col justify-evenly md:justify-center md:gap-4 mt-6 bg-white rounded-lg shadow-sm p-4 w-full md:h-full"
     >
-      <Typography mb={2} component={'h2'} variant="h6">
-        Create a job entry
-      </Typography>
-      <Stack sx={{ width: '100%' }} spacing={2}>
-        <JobTitleField disabled/>
-        <CompanyNameField/>
-        <JobDescriptionField />
-        <ApplicationDate />
-        <Button variant="contained">Add Application</Button>
-        <Button/>
-      </Stack>
-      {/* Application date */}
-      {/* company name */}
-      {/* Salary */}
-      {/* Personal Interest */}
-      {/* Enter Job */}
-    </Box>
+      <div>
+        <label
+          htmlFor="role"
+          className="block text-sm font-medium leading-6 text-gray-900 mb-2 md:hidden" 
+        >
+          Role
+        </label>
+        <input
+          type="text"
+          name="role"
+          id="role"
+          autoComplete="role"
+          placeholder="Enter role"
+          className="block py-2 pl-2 border-1 border-gray-400 placeholder:text-gray-500 focus:ring-1 focus:ring-blue-500 focus:bg-gray-50 bg-gray-200 rounded-md w-full"
+        />
+      </div>
+      <div>
+        <label
+          htmlFor="company"
+          className="block text-sm font-medium leading-6 text-gray-900 mb-2 md:hidden"
+        >
+          Company
+        </label>
+        <input
+          type="text"
+          name="company"
+          id="company"
+          placeholder="Enter company"
+          className="focus:ring-blue-500 focus:bg-gray-50 w-full py-2 pl-2 border-1 border-gray-400 placeholder:text-gray-500 focus:ring-0 bg-gray-200 rounded-md"
+        />
+      </div>
+      <div>
+        <label
+          htmlFor="url"
+          className="block text-sm font-medium leading-6 text-gray-900 mb-2 md:hidden"
+        >
+          Job URL
+        </label>
+        <input
+          type="text"
+          name="url"
+          id="url"
+          placeholder="Enter Job Url"
+          className="focus:ring-blue-500 focus:bg-gray-50 w-full py-2 pl-2 border-1 border-gray-400 placeholder:text-gray-500 focus:ring-0 bg-gray-200 rounded-md"
+        />
+      </div>
+      <div>
+        <label
+          htmlFor="description"
+          className="block text-sm font-medium leading-6 text-gray-900 mb-2 md:hidden"
+        >
+          Job description
+        </label>
+        <textarea
+          name="description"
+          id="description"
+          placeholder="Job Description"
+          className="focus:ring-blue-500 focus:bg-gray-50 w-full py-2 pl-2 border-1 border-gray-400 placeholder:text-gray-500 focus:ring-0 bg-gray-200 rounded-md"
+        ></textarea>
+      </div>
+      <div>
+        <label
+          htmlFor="salary"
+          className="block text-sm font-medium leading-6 text-gray-900 mb-2 md:hidden"
+        >
+          Salary
+        </label>
+        <input
+          type="number"
+          name="salary"
+          id="salary"
+          placeholder="Enter salary"
+          className="focus:ring-blue-500 focus:bg-gray-50 w-full py-2 pl-2 border-1 border-gray-400 placeholder:text-gray-500 focus:ring-0 bg-gray-200 rounded-md"
+        />
+      </div>
+      <div>
+        <label htmlFor="appDate"
+        className="block text-sm font-medium leading-6 text-gray-900 mb-2 md:hidden"
+        >Date</label>
+        <input
+          type="date"
+          name="appDate"
+          id="appDate"
+          className="focus:ring-blue-500 focus:bg-gray-50 w-full py-2 pl-2 border-1 border-gray-400 placeholder:text-gray-500 focus:ring-0 bg-gray-200 rounded-md"
+        />
+      </div>
+        <div>
+          <label
+            htmlFor="jobType"
+            className="block text-sm font-medium leading-6 text-gray-900 mb-2 md:inline-block md:mr-2"
+          >
+            Job Type
+          </label>
+          <select
+            name="jobType"
+            id="jobType"
+            className="border block w-full border-solid px-4 py-1 rounded-md border-gray-400"
+          >
+            <option value={'fulltime'}>Full-Time</option>
+            <option value={'parttime'}>Part-Time</option>
+            <option value={'contract-fulltime'}>Contract Full-Time</option>
+            <option value={'contract-parttime'}>Contract Part-Time</option>
+            <option value={'internship'}>Internship</option>
+            <option value={'volunteer'}>Volunteer</option>
+          </select>
+        </div>
+
+        <div>
+          <label
+            htmlFor="applicationstatus"
+            className="block text-sm font-medium leading-6 text-gray-900 mb-2 md:inline-block md:mr-2"
+          >
+            Application Status
+          </label>
+          <select
+            name="applicationstatus"
+            id="applicationstatus"
+            className="border block w-full border-solid px-4 py-1 rounded-md border-gray-400"
+          >
+            <option value={'pending'}>Pending</option>
+            <option value={'applied'}>Applied</option>
+          </select>
+        </div>
+      <button className="mt-4 bg-blue-500 py-2 text-white cursor-pointer hover:bg-blue-300 rounded-md flex justify-center items-center gap-1">
+        <FaPlus /> Add Application
+      </button>
+    </form>
   );
 };
 

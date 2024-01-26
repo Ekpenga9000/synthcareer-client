@@ -1,44 +1,25 @@
 import { FC, ReactElement } from 'react';
-import { Avatar, Box, Typography } from '@mui/material';
-import PropTypes from "prop-types"; 
+import PropTypes from 'prop-types';
 
 type profile = {
-    name?: string, 
-} 
-const Profile: FC<profile> = ({name}): ReactElement => {
-    
+  name?: string;
+};
+const Profile: FC<profile> = ({ name }): ReactElement => {
   return (
-    <Box
-      display={'flex'}
-      flexDirection={'column'}
-      justifyContent={'center'}
-      alignItems={'center'}
-    >
-      <Avatar
-        sx={{
-          width: '96px',
-          height: '96px',
-          backgroundColor: 'primary.main',
-          marginBottom: '16px',
-        }}
-      >
-        <Typography variant="h4" color="text.primary">
-          {`${name?.substring(0, 1)}`}
-        </Typography>
-      </Avatar>
-      <Typography variant="h6" color={'text.primary'}>
-        Welcome, {name}
-      </Typography>
-      <Typography variant="body1" color={'text.primary'}>
-        This is your person Job application manager
-      </Typography>
-    </Box>
+    <section className="flex flex-col justify-center items-center md:flex-row md:justify-start md:gap-3 w-full">
+      <div className='bg-blue-500 h-10 w-10 rounded-full flex justify-center items-center'>
+        <h4 className='text-white antialiased'>{`${name?.substring(0, 1)}`}</h4>
+      </div>
+      <div className=''>
+        <h4 className='font-semibold antialiased text-center md:text-start'>Welcome, {name}</h4>
+        <p className='antialiased text-xs text-gray-500'>Keep track of your job applications</p>
+      </div> 
+    </section>
   );
 };
 
 Profile.propTypes = {
-    name:PropTypes.string,
-}
+  name: PropTypes.string,
+};
 
 export default Profile;
-
