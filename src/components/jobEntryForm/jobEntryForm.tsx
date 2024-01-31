@@ -1,13 +1,37 @@
-import { ReactElement, FC, FormEvent } from 'react';
+import { ReactElement, FC, FormEvent, useRef, useState } from 'react';
 import { FaPlus } from 'react-icons/fa6';
 
 const JobEntryForm: FC = (): ReactElement => {
+  const initialData = {
+    role: "", 
+    company: "", 
+    url: "", 
+    description: "", 
+    salary: 0, 
+    appDate: "", 
+    jobType: "",
+    applicationstatus:""
+  }
+
+  const [formData, setFormData] = useState(initialData);
+  const formRef = useRef(null); 
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target; 
+
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    
+  }
+
   const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); 
+    console.log("Form", formData);
+    setFormData(initialData);
   };
 
   return (
     <form
+      ref={formRef}
       onSubmit={handleSubmit}
       className="border border-gray-900/10 flex flex-col justify-evenly md:justify-center md:gap-4 mt-6 bg-white rounded-lg shadow-sm p-4 w-full md:h-full"
     >
@@ -19,6 +43,8 @@ const JobEntryForm: FC = (): ReactElement => {
           Role
         </label>
         <input
+          onChange={handleOnChange}
+          value={formData.role}
           type="text"
           name="role"
           id="role"
@@ -35,6 +61,8 @@ const JobEntryForm: FC = (): ReactElement => {
           Company
         </label>
         <input
+          onChange={handleOnChange}
+          value={formData.company}
           type="text"
           name="company"
           id="company"
@@ -50,6 +78,8 @@ const JobEntryForm: FC = (): ReactElement => {
           Job URL
         </label>
         <input
+          onChange={handleOnChange}
+          value={formData.url}
           type="text"
           name="url"
           id="url"
@@ -65,6 +95,8 @@ const JobEntryForm: FC = (): ReactElement => {
           Job description
         </label>
         <textarea
+          value={formData.description}
+          onChange={handleOnChange}
           name="description"
           id="description"
           placeholder="Job Description"
@@ -79,6 +111,8 @@ const JobEntryForm: FC = (): ReactElement => {
           Salary
         </label>
         <input
+          value={formData.salary}
+          onChange={handleOnChange}
           type="number"
           name="salary"
           id="salary"
@@ -91,6 +125,8 @@ const JobEntryForm: FC = (): ReactElement => {
         className="block text-sm font-medium leading-6 text-gray-900 mb-2 md:hidden"
         >Date</label>
         <input
+          value={formData.appDate}
+          onChange={handleOnChange}
           type="date"
           name="appDate"
           id="appDate"
@@ -104,11 +140,14 @@ const JobEntryForm: FC = (): ReactElement => {
           >
             Job Type
           </label>
-          <select
+        <select
+          onChange={handleOnChange}
+          value={formData.jobType}
             name="jobType"
             id="jobType"
             className="border block w-full border-solid px-4 py-1 rounded-md border-gray-400"
-          >
+        >
+            <option value={''}>Select job type</option>
             <option value={'fulltime'}>Full-Time</option>
             <option value={'parttime'}>Part-Time</option>
             <option value={'contract-fulltime'}>Contract Full-Time</option>
@@ -125,11 +164,14 @@ const JobEntryForm: FC = (): ReactElement => {
           >
             Application Status
           </label>
-          <select
+        <select
+          onChange={handleOnChange}
+          value={formData.applicationstatus}
             name="applicationstatus"
             id="applicationstatus"
             className="border block w-full border-solid px-4 py-1 rounded-md border-gray-400"
-          >
+        >
+            <option value={''}>Select application status</option>
             <option value={'pending'}>Pending</option>
             <option value={'applied'}>Applied</option>
           </select>
